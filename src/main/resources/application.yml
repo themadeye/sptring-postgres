@@ -1,0 +1,24 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/bootrepo
+    username: postgres
+    password: madeye1028Kong
+    pool-size: 30
+flyway:
+  baseline-on-migrate: true
+  baseline-version: 0
+#    docker ps = show container list
+#    bash into database in docker terminal
+#    docker exec -it 'CONTAINER_ID' bin/bash
+#    \1 <- this cmd list out the database in docker terminal
+#    psql -U postgres
+#    CREATE DATABASE 'DATABASE_NAME'; <- cmd right here is create a database in docker terminal
+#    Once we have a db, we need to connect it, use \c 'DATABASE_NAME'
+#    Check relation (basically like check detail) use \d. \dt (for table : t = table)
+#    \d 'TABLE_NAME' got into table info
+
+#    CREATE EXTENSION "uuid-ossp"; <- this was to add an extension for generate an UUID in database.
+#    SELECT uuid_generate_v4(); <- This is generate an uuid.
+#    Example for insert one record for uuid: INSERT INTO person (id, name) VALUES (uuid_generate_v4(), 'Jamie Lannister');
+
+#    Flyway db naming policy - V1__TAABLENAME.sql
