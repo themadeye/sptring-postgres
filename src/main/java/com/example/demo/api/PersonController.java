@@ -10,7 +10,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("madeye/v1/person")
+// The default port for this server was 8080, if the frontend side wish to access from their very own origin port.
+// We need to add the CrossOrigin header and list out the frontend origin port.
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8081", "http://localhost:8082" })
 //restcontroller means this controller serve as a restful service : HTTP, GET, DELETE, POST, PUT
 @RestController
 public class PersonController {
@@ -23,13 +25,14 @@ public class PersonController {
     }
 
     //postMapping: THIS METHOD HERE WILL SERVE AS POST
-    @PostMapping
+    @PostMapping(path = "madeye/v1/person/{name}")
     public void addPerson(@Valid @NotNull @RequestBody Person person){
         personService.addPerson(person);
     }
 
     // this method will serve as get request
-    @GetMapping
+    @GetMapping("madeye/v1/person")
+//    @GetMapping
     public List<Person> getAllPeople(){
         return personService.getAllPeople();
     }
@@ -39,7 +42,8 @@ public class PersonController {
         return personService.getPersonById(id).orElse(null);
     }
 
-    @DeleteMapping(path = "{id}")
+//    @DeleteMapping(path = "{id}")
+    @DeleteMapping(path = "madeye/v1/person/{id}")
     public void deletePersonById(@PathVariable("id") UUID id){
         personService.deletePerson(id);
     }
