@@ -50,8 +50,9 @@ public class PersonController {
 
     // PUT= the update in REST
     // @Valid = means the param or data passed in should be valid, @NotNull in this case means param shouldn't be null.
-    @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person personToUpdate){
-        personService.updatePerson(id, personToUpdate);
+    @PutMapping(path = "madeye/v1/{name}/person/{id}")
+//    public void updatePerson(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person personToUpdate){
+    public void updatePerson(@PathVariable("id") UUID id, @PathVariable("name") String name, @RequestBody Person personToUpdate){
+        personService.updatePerson(id, name);
     }
 }

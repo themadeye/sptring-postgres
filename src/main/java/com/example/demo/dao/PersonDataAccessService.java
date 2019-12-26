@@ -64,7 +64,11 @@ public class PersonDataAccessService implements PersonDao{
     }
 
     @Override
-    public int updatePersonById(UUID id, Person person) {
-        return 0;
+    public int updatePersonById(UUID id, String name) {
+        final String sql = "UPDATE person SET name = ? WHERE id = ?";
+        // define query arguments
+        // The Param order should be in order with sql string
+        Object[] params = new Object[] { name, id};
+        return jdbcTemplate.update(sql, params);
     }
 }

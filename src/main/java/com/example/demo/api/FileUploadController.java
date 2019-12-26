@@ -51,10 +51,10 @@ public class FileUploadController {
 
     // PUT= the update in REST
     // @Valid = means the param or data passed in should be valid, @NotNull in this case means param shouldn't be null.
-    @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person personToUpdate){
-        personService.updatePerson(id, personToUpdate);
-    }
+//    @PutMapping(path = "{id}")
+//    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate){
+//        personService.updatePerson(id, personToUpdate);
+//    }
 
 
 
