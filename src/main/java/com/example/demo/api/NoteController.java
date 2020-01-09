@@ -1,19 +1,10 @@
 package com.example.demo.api;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
-import com.example.demo.dao.StorageService;
 import com.example.demo.model.Note;
-import com.example.demo.model.Person;
 import com.example.demo.service.NoteService;
-import com.example.demo.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -34,4 +25,8 @@ public class NoteController {
         noteService.addNote(note);
     }
 
+    @GetMapping("madeye/v1/note")
+    public List<Note> getAllNote(){
+        return noteService.getAllNote();
+    }
 }

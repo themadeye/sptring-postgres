@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NoteService {
 
@@ -17,5 +19,8 @@ public class NoteService {
     }
     public int addNote(Note note){
         return noteDao.addNote(note);
+    }
+    public List<Note> getAllNote(){
+        return noteDao.getAllNote();
     }
 }

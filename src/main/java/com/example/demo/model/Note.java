@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Note {
 
     private int id;
@@ -7,6 +9,14 @@ public class Note {
     private String subcategory;
     private String title;
     private String details;
+
+    public Note(@JsonProperty("id")int id, @JsonProperty("major") String major,  @JsonProperty("subcategory") String subcategory,  @JsonProperty("title") String title,  @JsonProperty("details") String details) {
+        this.id = id;
+        this.major = major;
+        this.subcategory = subcategory;
+        this.title = title;
+        this.details = details;
+    }
 
     public int getId() {
         return id;
