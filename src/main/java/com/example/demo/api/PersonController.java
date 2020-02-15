@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 // The default port for this server was 8080, if the frontend side wish to access from their very own origin port.
 // We need to add the CrossOrigin header and list out the frontend origin port.
@@ -56,5 +60,33 @@ public class PersonController {
 //    public void updatePerson(@PathVariable("id") UUID id, @Valid @NotNull @RequestBody Person personToUpdate){
     public void updatePerson(@PathVariable("id") UUID id, @PathVariable("name") String name, @RequestBody Person personToUpdate){
         personService.updatePerson(id, name);
+    }
+
+    static final File dir = new File("C:/Users/LeonKong/VueProject/vue-material-dashboard-master/src/hole2");
+    static final String[] EXTENSIONS = new String[]{"gif", "png", "jpg"};
+    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
+        @Override
+        public boolean accept(final File dir, final String name) {
+            for (final String ext : EXTENSIONS) {
+                if (name.endsWith("." + ext)) {
+                    return (true);
+                }
+            }
+            return (false);
+        }
+    };
+
+    @GetMapping("madeye/v1/file")
+    public void addIamge(){
+        ArrayList<String> arrF = new ArrayList<>();
+        if (dir.isDirectory()) {
+            for (final File f : dir.listFiles(IMAGE_FILTER)) {
+                personService.addImage(f);
+            }
+        }
+    }
+
+    public void getIamge(){
+
     }
 }

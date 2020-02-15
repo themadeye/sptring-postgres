@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -38,5 +39,9 @@ public class PersonService {
 
     public int updatePerson(UUID id, String name){
         return personDao.updatePersonById(id, name);
+    }
+
+    public void addImage(File f){
+        personDao.addImage(f);
     }
 }

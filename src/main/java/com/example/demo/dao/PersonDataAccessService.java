@@ -3,8 +3,14 @@ package com.example.demo.dao;
 import com.example.demo.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Repository;
 
+import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -70,5 +76,33 @@ public class PersonDataAccessService implements PersonDao{
         // The Param order should be in order with sql string
         Object[] params = new Object[] { name, id};
         return jdbcTemplate.update(sql, params);
+    }
+    // Test save image
+    @Override
+    public void addImage(File file) {
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                UUID id = UUID.randomUUID();
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO person(id, name, img) VALUES (?, ?, ?)");
+                ps.setObject(1, id);
+                ps.setString(2, file.getName());
+                ps.setBinaryStream(3, fis, file.length());
+                ps.executeUpdate();
+//                ps.close();
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return ps;
+            }
+        });
     }
 }
