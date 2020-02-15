@@ -78,11 +78,13 @@ public class PersonController {
 
     @GetMapping("madeye/v1/file")
     public void addIamge(){
-        ArrayList<String> arrF = new ArrayList<>();
+        ArrayList<File> arrF = new ArrayList<>();
         if (dir.isDirectory()) {
             for (final File f : dir.listFiles(IMAGE_FILTER)) {
-                personService.addImage(f);
+                arrF.add(f);
             }
+
+            personService.addImage(arrF);
         }
     }
 

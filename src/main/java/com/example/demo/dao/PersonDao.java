@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.Person;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,5 +29,5 @@ public interface PersonDao {
 
     int updatePersonById(UUID id, String name);
 
-    void addImage(File f);
+    void addImage(ArrayList<File> f);
 }

@@ -77,30 +77,31 @@ public class PersonDataAccessService implements PersonDao{
         Object[] params = new Object[] { name, id};
         return jdbcTemplate.update(sql, params);
     }
+
     // Test save image
     @Override
-    public void addImage(File file) {
+    public void addImage(ArrayList<File> file) {
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                UUID id = UUID.randomUUID();
-                FileInputStream fis = null;
-                try {
-                    fis = new FileInputStream(file);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
                 PreparedStatement ps = connection.prepareStatement("INSERT INTO person(id, name, img) VALUES (?, ?, ?)");
-                ps.setObject(1, id);
-                ps.setString(2, file.getName());
-                ps.setBinaryStream(3, fis, file.length());
-                ps.executeUpdate();
-//                ps.close();
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                // Notes: FileInputStream are always gonna throw Exception, just put a try block to handle it.
+                for(File f : file){
+                    UUID id = UUID.randomUUID();
+                    try (FileInputStream fis = new FileInputStream(f)) {
+                        ps.setObject(1, id);
+                        ps.setString(2, f.getName());
+                        ps.setBinaryStream(3, fis, f.length());
+                        ps.executeUpdate();
+                        if(fis != null){
+                            fis.close();
+                        }
+                    } // fileIn is closed
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+
                 return ps;
             }
         });

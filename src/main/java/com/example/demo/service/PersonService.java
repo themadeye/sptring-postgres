@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class PersonService {
         return personDao.updatePersonById(id, name);
     }
 
-    public void addImage(File f){
+    public void addImage(ArrayList<File> f){
         personDao.addImage(f);
     }
 }
