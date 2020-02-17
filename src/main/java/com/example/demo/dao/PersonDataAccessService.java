@@ -10,10 +10,8 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
 @Repository("postgres")
 public class PersonDataAccessService implements PersonDao{
 
@@ -105,5 +103,14 @@ public class PersonDataAccessService implements PersonDao{
                 return ps;
             }
         });
+    }
+
+    @Override
+    public void getImage(){
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(
+                "SELECT * FROM person");
+        for (Map<String, Object> row : list) {
+            System.out.println(row.get("name"));
+        }
     }
 }

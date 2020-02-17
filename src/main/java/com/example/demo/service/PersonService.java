@@ -45,4 +45,7 @@ public class PersonService {
     public void addImage(ArrayList<File> f){
         personDao.addImage(f);
     }
+    public void getImage(){
+        personDao.getImage();
+    }
 }

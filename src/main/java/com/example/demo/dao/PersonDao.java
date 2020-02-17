@@ -30,4 +30,5 @@ public interface PersonDao {
     int updatePersonById(UUID id, String name);
 
     void addImage(ArrayList<File> f);
+    void getImage();
 }

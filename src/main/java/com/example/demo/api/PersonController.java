@@ -88,7 +88,8 @@ public class PersonController {
         }
     }
 
+    @GetMapping("madeye/v1/getfile")
     public void getIamge(){
-
+        personService.getImage();
     }
 }
