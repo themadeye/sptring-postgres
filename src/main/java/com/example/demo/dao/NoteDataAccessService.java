@@ -29,6 +29,13 @@ public class NoteDataAccessService implements NoteDao{
     }
 
     @Override
+    public int deleteNote(Note note){
+        final String sql = "DELETE FROM note WHERE id = ?";
+        Object[] args = new Object[] {note.getId()};
+        return jdbcTemplate.update(sql, args);
+    }
+
+    @Override
     public List<Note> getAllNote(){
         final String sql = "SELECT * FROM note";
         // resultSet is a RowMapper

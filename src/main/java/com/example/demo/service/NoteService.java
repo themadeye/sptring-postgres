@@ -23,4 +23,8 @@ public class NoteService {
     public List<Note> getAllNote(){
         return noteDao.getAllNote();
     }
+
+    public int deleteNote(Note note){
+       return noteDao.deleteNote(note);
+    }
 }

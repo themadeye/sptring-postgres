@@ -9,5 +9,7 @@ public interface NoteDao {
         return addNote(note);
     }
 
+    int deleteNote(Note note);
+
     List<Note> getAllNote();
 }

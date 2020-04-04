@@ -38,7 +38,10 @@ public class NoteController {
         return noteService.getAllNote();
     }
 
-
+    @PostMapping("madeye/v1/note/delete")
+    public void deleteNote(@Valid @NotNull @RequestBody Note note){
+        noteService.deleteNote(note);
+    }
 
     static final File dir = new File("C:/Users/LeonKong/VueProject/vue-material-dashboard-master/src/hole2");
     static final String[] EXTENSIONS = new String[]{"gif", "png", "jpg"};

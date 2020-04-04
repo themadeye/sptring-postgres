@@ -1,6 +1,5 @@
 package com.example.demo.api;
 
-import com.example.demo.model.Note;
 import com.example.demo.model.Person;
 import com.example.demo.service.NoteService;
 import com.example.demo.service.PersonService;
@@ -14,7 +13,6 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 // The default port for this server was 8080, if the frontend side wish to access from their very own origin port.
 // We need to add the CrossOrigin header and list out the frontend origin port.
@@ -91,5 +89,58 @@ public class PersonController {
     @GetMapping("madeye/v1/getfile")
     public void getIamge(){
         personService.getImage();
+    }
+
+    class SuperClass {
+        SuperClass(int x) {
+            System.out.println("Super");
+        }
+    }
+
+    @GetMapping("madeye/v1/lambda")
+    public void lambdaExample(){
+
+        int array[] = {0, 1, 2, 3, 4};
+        int key = 3;
+
+        //with type declaration
+        MathOperation addition = (int a, int b) -> a + b;
+
+        //with out type declaration
+        MathOperation subtraction = (a, b) -> a - b;
+
+        //with return statement along with curly braces
+        MathOperation multiplication = (int a, int b) -> { return a * b; };
+
+        //without return statement and without curly braces
+        MathOperation division = (int a, int b) -> a / b;
+
+        System.out.println("10 + 5 = " + operate(10, 5, addition));
+        System.out.println("10 - 5 = " + operate(10, 5, subtraction));
+        System.out.println("10 x 5 = " + operate(10, 5, multiplication));
+        System.out.println("10 / 5 = " + operate(10, 5, division));
+
+        //without parenthesis
+        GreetingService greetService1 = message ->
+                System.out.println("Hello " + message);
+
+        //with parenthesis
+        GreetingService greetService2 = (message) ->
+                System.out.println("Hello " + message);
+
+        greetService1.sayMessage("Mahesh");
+        greetService2.sayMessage("Suresh");
+    }
+
+    interface MathOperation {
+        int operation(int a, int b);
+    }
+
+    interface GreetingService {
+        void sayMessage(String message);
+    }
+
+    private int operate(int a, int b, MathOperation operation) {
+        return operation.operation(a, b);
     }
 }
